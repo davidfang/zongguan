@@ -7,6 +7,23 @@ import styles from './Styles/LaunchScreenStyles'
 
 export default class LaunchScreen extends Component {
   render () {
+    console.log('aaaa')
+    console.tron.log('Hello, I\'m an example of how to log via Reactotron.')
+    console.tron.log({
+      message: 'pass objects for better logging',
+      someGeneratorFunction: 'selectAvatar'
+    })
+    console.tron.display({
+      name: '🔥 IGNITE 🔥',
+      preview: 'You should totally expand this',
+      value: {
+        '💃': 'Welcome to the future!',
+        subObject: 'subObject',
+        someInlineFunction: () => true,
+        someGeneratorFunction: 'startup',
+        someNormalFunction: 'selectAvatar'
+      }
+    })
     return (
       <View style={styles.mainContainer}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />

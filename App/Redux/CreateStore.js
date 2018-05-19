@@ -5,6 +5,8 @@ import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
 import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers'
+import devTools from 'remote-redux-devtools'
+import { Platform } from 'react-native'
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -35,8 +37,14 @@ export default (rootReducer, rootSaga) => {
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
-  const store = createAppropriateStore(rootReducer, compose(...enhancers))
-
+  // const store = createAppropriateStore(rootReducer, compose(...enhancers))
+  const store = createAppropriateStore(rootReducer, compose(...enhancers,
+    devTools({
+      name: Platform.OS,
+      hostname: 'localhost',
+      port: 5678
+    })
+  ))
   // configure persistStore and check reducer version number
   if (ReduxPersist.active) {
     Rehydration.updateReducers(store)

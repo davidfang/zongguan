@@ -1,9 +1,10 @@
 import { put, select } from 'redux-saga/effects'
 import GithubActions, { GithubSelectors } from '../Redux/GithubRedux'
 import { is } from 'ramda'
-
+import LoggedInActions, { isLoggedIn } from '../Redux/LoginRedux'
 // exported to make available for tests
 export const selectAvatar = GithubSelectors.selectAvatar
+export const selectLoggedInStatus = (state) => isLoggedIn(state.login)
 
 // process STARTUP actions
 export function * startup (action) {
@@ -36,5 +37,10 @@ export function * startup (action) {
   // only get if we don't have it yet
   if (!is(String, avatar)) {
     yield put(GithubActions.userRequest('GantMan'))
+  }
+
+  const isLoggedIn = yield select(selectLoggedInStatus)
+  if (isLoggedIn) {
+    yield put(LoggedInActions.autoLogin())
   }
 }
