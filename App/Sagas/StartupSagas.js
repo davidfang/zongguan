@@ -1,7 +1,10 @@
 import { put, select } from 'redux-saga/effects'
 import GithubActions, { GithubSelectors } from '../Redux/GithubRedux'
 import { is } from 'ramda'
-import LoggedInActions, { isLoggedIn } from '../Redux/LoginRedux'
+import LoginActions, { isLoggedIn } from '../Redux/LoginRedux'
+
+// import LoginActions from '../Redux/LoginRedux'
+import AccountActions from '../Redux/AccountRedux'
 // exported to make available for tests
 export const selectAvatar = GithubSelectors.selectAvatar
 export const selectLoggedInStatus = (state) => isLoggedIn(state.login)
@@ -41,6 +44,8 @@ export function * startup (action) {
 
   const isLoggedIn = yield select(selectLoggedInStatus)
   if (isLoggedIn) {
-    yield put(LoggedInActions.autoLogin())
+    yield put(LoginActions.loginLoad())
+    yield put(AccountActions.accountRequest())
+    yield put(LoginActions.autoLogin())
   }
 }

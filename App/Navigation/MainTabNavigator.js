@@ -8,6 +8,7 @@ import SearchScreen from '../Containers/SearchScreen'
 import ClassifyScreen from '../Containers/ClassifyScreen'
 import HomeScreen from '../Containers/HomeScreen'
 import TopicScreen from '../Containers/TopicScreen'
+import MyCenter from '../Containers/MyCenter'
 
 class SaleHot extends PureComponent {
   constructor (props) {
@@ -103,7 +104,7 @@ const TabNav = TabNavigator(
       }
     },
     me: {
-      screen: MeInfoScreen,
+      screen: MyCenter,
       navigationOptions: {
         tabBarLabel: '我的',
         title: '我的',

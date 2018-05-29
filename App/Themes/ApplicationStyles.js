@@ -9,7 +9,7 @@ const ApplicationStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.transparent
+      backgroundColor: Colors.background
     },
     backgroundImage: {
       position: 'absolute',
@@ -20,8 +20,11 @@ const ApplicationStyles = {
     },
     container: {
       flex: 1,
-      paddingTop: Metrics.baseMargin,
-      backgroundColor: Colors.transparent
+      paddingTop: Metrics.doubleBaseMargin,
+      backgroundColor: Colors.transparent,
+      //marginTop: Metrics.doubleBaseMargin,
+      //paddingTop: Metrics.baseMargin,
+      //backgroundColor: Colors.silver
     },
     section: {
       margin: Metrics.section,
@@ -44,6 +47,36 @@ const ApplicationStyles = {
       ...Fonts.style.h2,
       fontSize: 14,
       color: Colors.text
+    },
+    normal: {
+      ...Fonts.style.normal
+    },
+    separator: {
+      width: Metrics.screenWidth,
+      height: 7,
+      backgroundColor: Colors.cloud
+    },
+    buttonText: {
+      fontSize: 18,
+      color: 'white',
+      alignSelf: 'center'
+    },
+    button: {
+      height: 36,
+      backgroundColor: Colors.button,
+      borderColor: Colors.button,
+      borderRadius: 15,
+      marginBottom: 10,
+      marginLeft: 20,
+      marginRight: 20,
+      alignSelf: 'stretch',
+      justifyContent: 'center'
+    },
+    // 间隔线
+    underline: {
+      width: Metrics.screenWidth,
+      height: 0.5,
+      backgroundColor: '#E6E6E6'
     }
   },
   darkLabelContainer: {

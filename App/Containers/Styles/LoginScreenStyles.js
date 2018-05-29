@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics } from '../../Themes'
+import { ApplicationStyles, Colors, Metrics } from '../../Themes'
 
 export default StyleSheet.create({
+  ...ApplicationStyles.screen,
   container: {
     paddingTop: 70,
+    // marginTop: Metrics.doubleBaseMargin,
+    height: Metrics.screenHeight,
     backgroundColor: Colors.background
   },
   form: {
@@ -12,17 +15,27 @@ export default StyleSheet.create({
     borderRadius: 4
   },
   row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: Metrics.doubleBaseMargin,
     paddingHorizontal: Metrics.doubleBaseMargin
   },
   rowLabel: {
-    color: Colors.charcoal
+    fontSize: 18,
+    color: Colors.charcoal,
+    flex: 2
   },
   textInput: {
+    marginLeft: Metrics.baseMargin,
+    flex: 8,
     height: 40,
-    color: Colors.coal
+    color: Colors.coal,
+    borderColor: Colors.steel,
+    borderWidth: .5
   },
   textInputReadonly: {
+    flex: 1,
     height: 40,
     color: Colors.steel
   },
@@ -47,6 +60,12 @@ export default StyleSheet.create({
   },
   topLogo: {
     alignSelf: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    width: Metrics.screenWidth
+  },
+  viewWrap: {
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20
   }
 })

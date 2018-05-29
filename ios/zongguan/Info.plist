@@ -39,9 +39,19 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>需要相机</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>需要拍摄</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>需要照片</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要照片</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
