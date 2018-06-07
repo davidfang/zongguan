@@ -20,11 +20,12 @@ const ApplicationStyles = {
     },
     container: {
       flex: 1,
-      paddingTop: Metrics.doubleBaseMargin,
+      //paddingTop: Metrics.doubleBaseMargin,
       backgroundColor: Colors.transparent,
       //marginTop: Metrics.doubleBaseMargin,
       //paddingTop: Metrics.baseMargin,
       //backgroundColor: Colors.silver
+      position: 'relative'
     },
     section: {
       margin: Metrics.section,

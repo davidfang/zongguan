@@ -2,6 +2,7 @@ import { put, select } from 'redux-saga/effects'
 import GithubActions, { GithubSelectors } from '../Redux/GithubRedux'
 import { is } from 'ramda'
 import LoginActions, { isLoggedIn } from '../Redux/LoginRedux'
+import BannerActions from '../Redux/BannerRedux'
 
 // import LoginActions from '../Redux/LoginRedux'
 import AccountActions from '../Redux/AccountRedux'
@@ -48,4 +49,6 @@ export function * startup (action) {
     yield put(AccountActions.accountRequest())
     yield put(LoginActions.autoLogin())
   }
+  yield put(BannerActions.bannerRequest('swiper'))
+  yield put(BannerActions.bannerRequest('recommend'))
 }

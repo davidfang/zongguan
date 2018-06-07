@@ -28,7 +28,8 @@ const metrics = {
     medium: 40,
     large: 60,
     logo: 200
-  }
+  },
+  isIOS: Platform.OS === 'ios'
 }
 
 export default metrics

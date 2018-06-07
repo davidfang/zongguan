@@ -10,6 +10,8 @@ import HomeScreen from '../Containers/HomeScreen'
 import TopicScreen from '../Containers/TopicScreen'
 import MyCenter from '../Containers/MyCenter'
 
+import  SearchBar from '../Components/SearchBar'
+
 class SaleHot extends PureComponent {
   constructor (props) {
     super(props)
@@ -36,6 +38,16 @@ const TabNav = TabNavigator(
       screen: HomeScreen,
       navigationOptions: {
         tabBarLabel: '首页',
+        header: (
+          <SearchBar
+            showLogo={true}
+            onSubmit={key => {
+              navigate('result', {
+                keyworld: key
+              })
+            }}
+          />
+        ),
         tabBarIcon: ({tintColor, focused}) => (
           <Image
             source={require('../Images/nav_home.png')}

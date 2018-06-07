@@ -6,6 +6,7 @@ import DebugConfig from '../Config/DebugConfig'
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../Redux/StartupRedux'
+import { BannerTypes } from '../Redux/BannerRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 //import { LoginTypes as Login2Types } from '../Redux/Login2Redux'
 import { LoginTypes } from '../Redux/LoginRedux'
@@ -19,6 +20,7 @@ import { AppSetTypes } from '../Redux/AppSetRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
+import { getBanner } from './BannerSagas'
 import { getUserAvatar } from './GithubSagas'
 // import { login as login2 } from './Login2Sagas'
 
@@ -40,6 +42,7 @@ export default function * root () {
   yield all([
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
+    takeEvery(BannerTypes.BANNER_REQUEST, getBanner, api),
     takeEvery(AppSetTypes.PROVINCE_REQUEST, getAppSetProvince, api),
 
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
