@@ -26,7 +26,9 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const BannerSelectors = {
-  getData: state => state.data
+  getItems: state => state.items,
+  getSwiper: state => state.swiper,
+  getRecommend: state => state.recommend
 }
 
 /* ------------- Reducers ------------- */

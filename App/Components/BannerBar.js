@@ -5,10 +5,10 @@ import styles from './Styles/BannerBarStyle'
 
 export default class BannerBar extends Component {
   // // Prop type warnings
-  // static propTypes = {
-  //   someProperty: PropTypes.object,
-  //   someSetting: PropTypes.bool.isRequired,
-  // }
+  static propTypes = {
+    dataSource: PropTypes.array.isRequired,
+    navigation: PropTypes.object.isRequired
+  }
   //
   // // Defaults for props
   // static defaultProps = {

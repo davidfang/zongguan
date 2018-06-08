@@ -3,6 +3,7 @@ import GithubActions, { GithubSelectors } from '../Redux/GithubRedux'
 import { is } from 'ramda'
 import LoginActions, { isLoggedIn } from '../Redux/LoginRedux'
 import BannerActions from '../Redux/BannerRedux'
+import TbActions from '../Redux/TbRedux'
 
 // import LoginActions from '../Redux/LoginRedux'
 import AccountActions from '../Redux/AccountRedux'
@@ -51,4 +52,5 @@ export function * startup (action) {
   }
   yield put(BannerActions.bannerRequest('swiper'))
   yield put(BannerActions.bannerRequest('recommend'))
+  //yield put(TbActions.tbIndexRecommendRequest(1))
 }

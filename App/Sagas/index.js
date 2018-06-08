@@ -17,6 +17,8 @@ import { AccountTypes } from '../Redux/AccountRedux'
 import { CaptchaCodeTypes } from '../Redux/CaptchaCodeRedux'
 
 import { AppSetTypes } from '../Redux/AppSetRedux'
+
+import { TbTypes } from '../Redux/TbRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
@@ -30,6 +32,8 @@ import { register } from './RegisterSagas'
 import { forgotPassword, changePassword } from './PasswordSagas'
 import { getAccount, updateAccount, updateProfile, uploadAvatar } from './AccountSagas'
 import { getCaptcha, getCode } from './CaptchaCodeSagas'
+
+import { getTbIndexRecommend } from './TbSagas'
 
 /* ------------- API ------------- */
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -62,6 +66,8 @@ export default function * root () {
     takeLatest(AccountTypes.UPLOAD_AVATAR_REQUEST, uploadAvatar, api),
     takeLatest(AccountTypes.PROFILE_UPDATE_REQUEST, updateProfile, api),
     // some sagas receive extra parameters in addition to an action
-    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
+    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
+
+    takeLatest(TbTypes.TB_INDEX_RECOMMEND_REQUEST, getTbIndexRecommend, api)
   ])
 }

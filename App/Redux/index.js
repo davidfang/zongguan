@@ -15,6 +15,7 @@ export const reducers = combineReducers({
   captchaCode: require('./CaptchaCodeRedux').reducer,
   account: require('./AccountRedux').reducer,
   appSet: require('./AppSetRedux').reducer,
+  tb: require('./TbRedux').reducer,
 
   password: require('./PasswordRedux').reducer
 })

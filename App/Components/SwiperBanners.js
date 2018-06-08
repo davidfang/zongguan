@@ -8,7 +8,8 @@ import styles from './Styles/SWiperBannersStyle'
 export default class SwiperBanners extends Component {
   // // Prop type warnings
   static propTypes = {
-    dataSource: PropTypes.array.isRequired
+    dataSource: PropTypes.array.isRequired,
+    navigation: PropTypes.object.isRequired
   }
   //
   // // Defaults for props

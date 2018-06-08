@@ -68,6 +68,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
   // ignite-jhipster-api-method-needle
   const uploadAvatar = (formData) => api.post('v1/profile/avatar-upload', formData) //上传图像
 
+  const getTbIndexRecommend = (page) => api.get('v1/taobao/index', {page}) // 获得首页淘宝推荐产品
 
   // ------
   // STEP 3
@@ -106,7 +107,8 @@ const create = (baseURL = AppConfig.apiUrl) => {
     getCode,
 
     getProvince,
-    uploadAvatar
+    uploadAvatar,
+    getTbIndexRecommend
   }
 }
 
