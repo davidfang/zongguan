@@ -102,7 +102,6 @@ class HomeScreen extends Component {
   }
   render () {
     const {navigate} = this.props.navigation
-    const isRefreshing = this.state.refreshState === 1
     return (
       <View style={styles.container}>
         <SearchBar

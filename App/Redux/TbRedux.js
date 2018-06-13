@@ -23,7 +23,7 @@ export const INITIAL_STATE = Immutable({
   productLists: {}, // 产品表
   indexRecommend: [], // 首页推荐产品集
   indexRecommendMore: true, // 首页推荐产品集是否有更多
-  fetching: null,
+  fetching: false,
   payload: null,
   error: null
 })

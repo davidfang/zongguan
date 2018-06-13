@@ -19,6 +19,7 @@ import { CaptchaCodeTypes } from '../Redux/CaptchaCodeRedux'
 import { AppSetTypes } from '../Redux/AppSetRedux'
 
 import { TbTypes } from '../Redux/TbRedux'
+import { GoodsCategoryTypes } from '../Redux/GoodsCategoryRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
@@ -34,6 +35,7 @@ import { getAccount, updateAccount, updateProfile, uploadAvatar } from './Accoun
 import { getCaptcha, getCode } from './CaptchaCodeSagas'
 
 import { getTbIndexRecommend } from './TbSagas'
+import { getGoodsCategory } from './GoodsCategorySagas'
 
 /* ------------- API ------------- */
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -68,6 +70,7 @@ export default function * root () {
     // some sagas receive extra parameters in addition to an action
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
 
-    takeLatest(TbTypes.TB_INDEX_RECOMMEND_REQUEST, getTbIndexRecommend, api)
+    takeLatest(TbTypes.TB_INDEX_RECOMMEND_REQUEST, getTbIndexRecommend, api),
+    takeLatest(GoodsCategoryTypes.GOODS_CATEGORY_REQUEST, getGoodsCategory, api)
   ])
 }

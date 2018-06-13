@@ -16,6 +16,7 @@ export const reducers = combineReducers({
   account: require('./AccountRedux').reducer,
   appSet: require('./AppSetRedux').reducer,
   tb: require('./TbRedux').reducer,
+  goodsCategory: require('./GoodsCategoryRedux').reducer,
 
   password: require('./PasswordRedux').reducer
 })

@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { StackNavigator } from 'react-navigation'
+import TestList from '../Containers/TestList'
 import RegisterScreen from '../Containers/RegisterScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import ForgotPasswordScreen from '../Containers/ForgotPasswordScreen'
@@ -29,6 +30,7 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
+  TestList: { screen: TestList },
   LoginScreen: { screen: LoginScreen },
   RegisterScreen: { screen: RegisterScreen },
   ForgotPasswordScreen: { screen: ForgotPasswordScreen },
