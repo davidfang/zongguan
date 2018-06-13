@@ -2,7 +2,6 @@ import React from 'react'
 import { View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { StackNavigator } from 'react-navigation'
-import TestList from '../Containers/TestList'
 import RegisterScreen from '../Containers/RegisterScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import ForgotPasswordScreen from '../Containers/ForgotPasswordScreen'
@@ -30,15 +29,14 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  TestList: { screen: TestList },
-  LoginScreen: { screen: LoginScreen },
-  RegisterScreen: { screen: RegisterScreen },
-  ForgotPasswordScreen: { screen: ForgotPasswordScreen },
-  ChangePasswordScreen: { screen: ChangePasswordScreen },
+  LoginScreen: {screen: LoginScreen},
+  RegisterScreen: {screen: RegisterScreen},
+  ForgotPasswordScreen: {screen: ForgotPasswordScreen},
+  ChangePasswordScreen: {screen: ChangePasswordScreen},
   SettingsScreen: {
     screen: SettingsScreen,
-    navigationOptions: ({ navigation }) => {
-      const { state } = navigation
+    navigationOptions: ({navigation}) => {
+      const {state} = navigation
       return {
         title: '设置'
       }
@@ -56,12 +54,12 @@ const PrimaryNav = StackNavigator({
   ChannelScreen: {screen: ChannelScreen},
   HomeScreen: {screen: HomeScreen},
   LoadingScreen: {screen: LoadingScreen},
-  LoggedInStack: { screen: LoggedInStackNavigator },
-  NotLoggedInStack: { screen: NotLoggedInStackNavigator },
+  LoggedInStack: {screen: LoggedInStackNavigator},
+  NotLoggedInStack: {screen: NotLoggedInStackNavigator},
   MainStack: {
     screen: MainTabNavigator,
-    navigationOptions: ({ navigation }) => {
-      const { state } = navigation
+    navigationOptions: ({navigation}) => {
+      const {state} = navigation
       return {
         header: null
       }
@@ -74,12 +72,14 @@ const PrimaryNav = StackNavigator({
   mode: 'card',
   initialRouteName: 'MainStack',
   navigationOptions: ({navigation}) => {
-    let {goBack, navigate} = navigation;
+    let {goBack, navigate} = navigation
     return {
       headerStyle: styles.header,
       headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <Icon name="chevron-left" onPress={()=>{goBack()}} size={24} color="#fff" style={{marginLeft: 20}} />,
-      headerRight: <Icon name="home" onPress={()=>{navigate('MainStack')}} size={24} color="#fff" style={{marginRight: 20}} />,
+      headerLeft: <Icon name='chevron-left' onPress={() => {goBack()}} size={24} color='#fff'
+                        style={{marginLeft: 20}}/>,
+      headerRight: <Icon name='home' onPress={() => {navigate('MainStack')}} size={24} color='#fff'
+                         style={{marginRight: 20}}/>,
     }
   }
 })

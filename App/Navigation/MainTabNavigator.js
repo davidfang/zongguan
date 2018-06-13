@@ -10,10 +10,7 @@ import HomeScreen from '../Containers/HomeScreen'
 import TopicScreen from '../Containers/TopicScreen'
 import MyCenter from '../Containers/MyCenter'
 
-import ParcelPage from '../Containers/ParcelPage'
-
 import  SearchBar from '../Components/SearchBar'
-import  TestList from '../Containers/TestList'
 
 class SaleHot extends PureComponent {
   constructor (props) {
@@ -88,7 +85,7 @@ const TabNav = TabNavigator(
       }
     },
     hot: {
-      screen: TestList,
+      screen: SaleHot,
       navigationOptions: {
         tabBarLabel: '销量爆款',
         title: '销量爆款',
