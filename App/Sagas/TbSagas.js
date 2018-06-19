@@ -12,10 +12,11 @@
 
 import { call, put } from 'redux-saga/effects'
 import TbActions from '../Redux/TbRedux'
+
 // import { TbSelectors } from '../Redux/TbRedux'
 
 export function * getTbIndexRecommend (api, action) {
-  const { page } = action
+  const {page} = action
   // get current data from Store
   // const currentData = yield select(TbSelectors.getData)
   // make the call to the api
@@ -25,9 +26,36 @@ export function * getTbIndexRecommend (api, action) {
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
-    //yield put(TbActions.tbSuccess(response.data))
-    yield put(TbActions.tbIndexRecommendSuccess(response.data.data.results))
+    // yield put(TbActions.tbSuccess(response.data))
+    if (response.data.status) {
+      yield put(TbActions.tbIndexRecommendSuccess(response.data.data))
+    } else {
+      yield put(TbActions.tbFailure(response.data.message, response))
+    }
   } else {
-    yield put(TbActions.tbIndexRecommendFailure())
+    yield put(TbActions.tbFailure(response.problem, response))
+  }
+}
+
+export function * getTbDetail (api, action) {
+  const {goodsId} = action
+  // get current data from Store
+  // const currentData = yield select(TbSelectors.getData)
+  // make the call to the api
+  const response = yield call(api.getTbDetail, goodsId)
+
+  // success?
+  if (response.ok) {
+    // You might need to change the response here - do this with a 'transform',
+    // located in ../Transforms/. Otherwise, just pass the data back from the api.
+    // yield put(TbActions.tbSuccess(response.data))
+    if (response.data.status) {
+      const {smallImages, detailImages, guessLike} = response.data.data
+      yield put(TbActions.tbDetailSuccess(goodsId, smallImages, detailImages, guessLike, response.data.data))
+    } else {
+      yield put(TbActions.tbFailure(response.data.message, response))
+    }
+  } else {
+    yield put(TbActions.tbFailure(response.problem, response))
   }
 }

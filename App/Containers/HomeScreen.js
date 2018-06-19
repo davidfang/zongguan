@@ -26,7 +26,7 @@ class HomeScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isShow: false
+      scrollIsShow: false
     }
     this.flag = 1
 
@@ -43,7 +43,7 @@ class HomeScreen extends Component {
           navigation={this.props.navigation}
         />
         <BannerBar dataSource={this.props.recommend} navigation={this.props.navigation}/>
-        <Lanmu navigation={this.props.navigation}/>
+        {/*<Lanmu navigation={this.props.navigation}/>*/}
       </View>
     )
   }
@@ -60,7 +60,7 @@ class HomeScreen extends Component {
   _onScroll = e => {
     const offsetY = e.nativeEvent.contentOffset.y
     this.setState({
-      isShow: offsetY > 100
+      scrollIsShow: offsetY > 100
     })
   }
 
@@ -98,7 +98,7 @@ class HomeScreen extends Component {
     <SectionListItem navigation={this.props.navigation} product={item} />
   )
   componentWillMount() {
-    //this.props.getTbIndexRecommend(1)
+    // this.props.getTbIndexRecommend(1)
   }
   render () {
     const {navigate} = this.props.navigation
@@ -141,7 +141,7 @@ class HomeScreen extends Component {
             />
           }
         />
-        <ScrollToTop isShow={this.state.isShow} scrollTo={this._scrollToTop} />
+        <ScrollToTop isShow={this.state.scrollIsShow} scrollTo={this._scrollToTop} />
       </View>
     )
   }
@@ -181,17 +181,14 @@ const mapStateToProps = (state) => {
   ]
 
   // 获取首页淘宝推荐的产品
-  const products = TbSelectors.getProductLists(state.tb)
-  const indexRecommend = TbSelectors.getIndexRecommend(state.tb)
-  // 必须先判断是否有数据
-  const tbIndexRecommend = Array.isArray(indexRecommend) && indexRecommend.length && indexRecommend.map(id => products[id])
+  const tbIndexRecommend = TbSelectors.getIndexRecommendPrds(state.tb)
 
   return {
     swiper,
     recommend: [...staticRecommend, ...recommend],
     tbIndexRecommend, // 首页淘宝推荐的产品
     fetching: state.tb.fetching, // 加载
-    tbIndexRecommendMore: state.tb.indexRecommendMore, // 更多
+    tbIndexRecommendMore: state.tb.indexRecommendMore // 更多
   }
 }
 

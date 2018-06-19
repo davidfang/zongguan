@@ -23,7 +23,16 @@ class ClassifyScreen extends Component {
     }
   }
 
-
+  /**
+   * getItemLayout是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，getItemLayout用起来就既高效又简单
+   */
+  _itemLayout = (item, index) => {
+    return {
+      length: 20,
+      offset: 20 * index,
+      index
+    }
+  }
   _redirect = item => {
     const {navigate} = this.props.navigation
     navigate('ClassifyListScreen', {
@@ -117,6 +126,7 @@ class ClassifyScreen extends Component {
               style={styles.leftList}
               data={this.props.goodsCategories}
               renderItem={(item) => this.renderLRow(item)}
+              getItemLayout={this._itemLayout}
               ItemSeparatorComponent={() => this.separator()}
               keyExtractor={(item) => item.id}
 

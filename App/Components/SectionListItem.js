@@ -23,10 +23,10 @@ export default class SectionListItem extends Component {
   _onRedirect = () => {
     const {product, navigation} = this.props
     navigation.navigate &&
-    navigation.navigate('detail', {
-      itemId: product.SPID,
-      title: product.SPMC,
-      intro: product
+    navigation.navigate('DetailScreen', {
+      goodsId: product.goodsId,
+      title: product.title,
+      goodsInfo: product
     })
   }
 
@@ -43,7 +43,7 @@ export default class SectionListItem extends Component {
         activeOpacity={1}
         style={styles.productItem}
       >
-        <Image style={styles.zhutu} source={{uri: product.pict_url}}/>
+        <Image style={styles.zhutu} source={{uri: product.objUrl}}/>
         <View style={styles.info}>
           <Text style={styles.title} numberOfLines={2}>
             {product.title}
@@ -51,24 +51,24 @@ export default class SectionListItem extends Component {
           <View style={styles.coupon}>
             {/* 券信息 */}
             <Text style={styles.couponTitle}>券</Text>
-            <Text style={styles.couponInfo}>￥{product.CP}</Text>
+            <Text style={styles.couponInfo}>￥{product.couponPrice}</Text>
           </View>
           <View style={styles.sale}>
             <Image style={styles.saleImage}/>
-            <Text style={styles.saleInfo}>已售 {product.volume}件</Text>
+            <Text style={styles.saleInfo}>已售 {product.purchaseNum}/{product.goodTotal}件</Text>
           </View>
           <View style={styles.price}>
             <View
               style={{flexDirection: 'row', alignItems: 'baseline', flex: 1}}
             >
               <Text>券后价</Text>
-              <Text style={styles.cprice}>￥{product.zk_final_price}</Text>
+              <Text style={styles.cprice}>￥{product.rebatePrice}</Text>
             </View>
             <View
               style={{flexDirection: 'row', alignItems: 'baseline', flex: 1}}
             >
               <Text>原价</Text>
-              <Text style={styles.rprice}>￥{product.reserve_price}</Text>
+              <Text style={styles.rprice}>￥{product.costPrice}</Text>
             </View>
           </View>
         </View>

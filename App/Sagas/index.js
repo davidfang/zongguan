@@ -34,7 +34,7 @@ import { forgotPassword, changePassword } from './PasswordSagas'
 import { getAccount, updateAccount, updateProfile, uploadAvatar } from './AccountSagas'
 import { getCaptcha, getCode } from './CaptchaCodeSagas'
 
-import { getTbIndexRecommend } from './TbSagas'
+import { getTbIndexRecommend, getTbDetail } from './TbSagas'
 import { getGoodsCategory } from './GoodsCategorySagas'
 
 /* ------------- API ------------- */
@@ -70,7 +70,9 @@ export default function * root () {
     // some sagas receive extra parameters in addition to an action
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
 
+    takeLatest(GoodsCategoryTypes.GOODS_CATEGORY_REQUEST, getGoodsCategory, api),
     takeLatest(TbTypes.TB_INDEX_RECOMMEND_REQUEST, getTbIndexRecommend, api),
-    takeLatest(GoodsCategoryTypes.GOODS_CATEGORY_REQUEST, getGoodsCategory, api)
+    takeLatest(TbTypes.TB_DETAIL_REQUEST, getTbDetail, api)
+
   ])
 }

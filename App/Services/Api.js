@@ -68,8 +68,9 @@ const create = (baseURL = AppConfig.apiUrl) => {
   // ignite-jhipster-api-method-needle
   const uploadAvatar = (formData) => api.post('v1/profile/avatar-upload', formData) //上传图像
 
-  const getTbIndexRecommend = (page) => api.get('v1/taobao/index', {page}) // 获得首页淘宝推荐产品
   const getGoodsCategory = () => api.get('v1/goods-category/index') // 获得产品分类
+  const getTbIndexRecommend = (page) => api.get('v1/taobao/index', {page}) // 获得首页淘宝推荐产品
+  const getTbDetail = (goodsId) => api.get('v1/taobao/detail', {goodsId}) // 获得产品详情
 
   // ------
   // STEP 3
@@ -109,8 +110,9 @@ const create = (baseURL = AppConfig.apiUrl) => {
 
     getProvince,
     uploadAvatar,
+    getGoodsCategory,
     getTbIndexRecommend,
-    getGoodsCategory
+    getTbDetail
   }
 }
 

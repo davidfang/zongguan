@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { StackNavigator } from 'react-navigation'
 import RegisterScreen from '../Containers/RegisterScreen'
