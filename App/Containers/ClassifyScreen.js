@@ -40,19 +40,6 @@ class ClassifyScreen extends Component {
       title: item.name
     })
   }
-  _renderItem = ({item}) => (
-    <TouchableOpacity
-      style={styles.classifyItem}
-      onPress={() => this._redirect(item)}
-    >
-      <View style={styles.info}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.desc}>{item.desc}</Text>
-      </View>
-      <Image style={styles.image} source={{uri: item.image}}/>
-    </TouchableOpacity>
-  )
-
   renderLRow = (item) => {
     return (
       <TouchableOpacity

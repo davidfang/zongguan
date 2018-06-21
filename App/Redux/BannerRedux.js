@@ -3,7 +3,7 @@ import Immutable from 'seamless-immutable'
 import { normalize, schema } from 'normalizr'
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
+const {Types, Creators} = createActions({
   bannerRequest: ['banner_type'],
   bannerSuccess: ['data', 'banner_type'],
   bannerFailure: null
@@ -35,7 +35,7 @@ export const BannerSelectors = {
 
 // request the data from an api
 export const request = (state, action) =>
-  state.merge({ fetching: true })
+  state.merge({fetching: true})
 
 // successful api lookup
 export const success = (state, action) => {
@@ -43,14 +43,14 @@ export const success = (state, action) => {
 
   const bannerSchema = new schema.Entity('items')
   const bannerData = normalize(data.items, [bannerSchema])
-  const {entities:{ items },result} = bannerData
-  Object.assign(items, state.items)
-  return state.merge({ fetching: false, error: null, data, items, [ banner_type ]: result, payload: null })
+  const {entities: {items}, result} = bannerData
+  const resultItems = Object.assign({}, state.items, items)
+  return state.merge({fetching: false, error: null, data, items: resultItems, [banner_type]: result, payload: null})
 }
 
 // Something went wrong somewhere.
 export const failure = (state, action) => {
-  const { payload } = action
+  const {payload} = action
   return INITIAL_STATE
   //state.merge({fetching: false, error: true, payload})
 }

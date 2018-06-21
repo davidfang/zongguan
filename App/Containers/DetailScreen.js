@@ -8,6 +8,7 @@ import TbActions, { TbSelectors } from '../Redux/TbRedux'
 import ScrollToTop from '../Components/ScrollToTop'
 import ProductImages from '../Components/ProductImages'
 import ProductName from '../Components/ProductName'
+import GuessLike from '../Components/GuessLike'
 // Styles
 import styles from './Styles/DetailScreenStyle'
 import { Metrics } from '../Themes'
@@ -55,11 +56,12 @@ class DetailScreen extends Component {
 
   _renderHeader = () => {
     let {goodsInfo} = this.state
-    let {smallImages} = this.props
+    let {smallImages, guessLike} = this.props
     return (
       <View>
         <ProductImages source={smallImages}/>
         <ProductName product={goodsInfo}/>
+        <GuessLike goods={guessLike} navigation={this.props.navigation}/>
         <View
           style={{
             borderLeftColor: '#FF0036',
@@ -78,7 +80,7 @@ class DetailScreen extends Component {
               paddingLeft: 10
             }}
           >
-            商品图片
+            商品详情
           </Text>
         </View>
       </View>

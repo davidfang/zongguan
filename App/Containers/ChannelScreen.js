@@ -1,32 +1,40 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { View, Text, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import {GoodsCategorySelectors} from '../Redux/GoodsCategoryRedux'
 
+import ChanelBar from '../Components/ChanelBar'
+import SortBar from '../Components/SortBar'
 // Styles
 import styles from './Styles/ChannelScreenStyle'
 
 class ChannelScreen extends Component {
+
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        <ChanelBar data={this.props.goodsCategories} navigation={this.props.navigation} selected={this.props.channel}/>
+        <SortBar />
         <KeyboardAvoidingView behavior='position'>
           <Text>ChannelScreen</Text>
         </KeyboardAvoidingView>
-      </ScrollView>
+      </View>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const {navigation: {state: {params}}} = props
+  const goodsCategories = GoodsCategorySelectors.getData(state.goodsCategory)
   return {
+    channel: params.channelId,
+    goodsCategories
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelScreen)

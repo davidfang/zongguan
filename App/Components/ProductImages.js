@@ -20,7 +20,7 @@ export default class ProductImages extends Component {
     return (
       <View style={styles.swiper}>
         <Swiper
-          height={150}
+          height={140}
           loop={true}
           index={0}
           autoplay={true}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, Text, WebView } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -8,25 +8,29 @@ import { connect } from 'react-redux'
 import styles from './Styles/WebScreenStyle'
 
 class WebScreen extends Component {
+  constructor (props) {
+    super(props)
+  }
+
   render () {
+    const {state} = this.props.navigation
+
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>WebScreen</Text>
-        </KeyboardAvoidingView>
-      </ScrollView>
+      <WebView
+        style={styles.container}
+        javaScriptEnabled={true}
+        source={{uri: state.params.url}}
+      />
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  return {
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WebScreen)

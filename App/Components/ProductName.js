@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
 import styles from './Styles/ProductNameStyle'
 
@@ -21,21 +21,6 @@ export default class ProductName extends Component {
         <Text style={styles.name} numberOfLines={2}>
           {product.title}
         </Text>
-        <Text
-          style={{
-            marginTop: 5,
-            marginBottom: 5
-          }}
-        >
-          小编推荐：
-          <Text
-            style={{
-              color: "#FF3C00"
-            }}
-          >
-            {/*product.Desc*/}
-          </Text>
-        </Text>
         <View style={styles.price}>
           <View style={styles.oldPrice}>
             <Text>券后价</Text>
@@ -46,8 +31,18 @@ export default class ProductName extends Component {
             <Text style={styles.couponTitle}>券</Text>
             <Text style={styles.couponInfo}>{product.couponPrice}</Text>
           </View>
-          <Text>已售{product.purchaseNum}件</Text>
+          <Text >已售{product.purchaseNum}件</Text>
         </View>
+        <Text
+          style={{
+            //marginTop: 5,
+            //marginBottom: 5
+            color: '#FF3C00',
+            textAlign: 'center'
+          }}
+        >
+          -----相关推荐-----
+        </Text>
       </View>
     )
   }

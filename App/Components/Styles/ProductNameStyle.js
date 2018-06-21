@@ -45,8 +45,8 @@ export default StyleSheet.create({
   couponTitle: {
     backgroundColor: '#ff6600',
     color: '#fff',
-    paddingLeft: 3,
-    paddingRight: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
     borderWidth: 1,
     borderColor: '#ff6600',
     textAlign: 'center'
@@ -54,7 +54,7 @@ export default StyleSheet.create({
   couponInfo: {
     borderWidth: 1,
     borderColor: '#ff6600',
-    paddingLeft: 5,
-    paddingRight: 5
+    paddingLeft: 15,
+    paddingRight: 10
   }
 })

@@ -61,6 +61,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>taobao</string>
+		<string>alipay</string>
+		<string>weixin</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

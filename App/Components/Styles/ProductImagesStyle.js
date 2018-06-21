@@ -7,12 +7,12 @@ export default StyleSheet.create({
   },
   swiper: {
     width: Metrics.screenWidth,
-    height: Metrics.screenWidth * 0.673,
+    height: Metrics.screenWidth * 0.5,
     padding: 0,
     margin: 0
   },
   swiperImage: {
     width: Metrics.screenWidth,
-    height: Metrics.screenWidth * 0.673
+    height: Metrics.screenWidth * 0.5
   }
 })

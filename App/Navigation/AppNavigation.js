@@ -43,15 +43,47 @@ const PrimaryNav = StackNavigator({
     }
   },//{ screen: SettingsScreen },
   MeInfoScreen: {screen: MeInfoScreen},
-  WebScreen: {screen: WebScreen},
+  WebScreen: {
+    screen: WebScreen,
+    navigationOptions: ({navigation}) => {
+      const {state} = navigation
+      return {
+        title: state.params.title
+      }
+    }
+  },
   TopicScreen: {screen: TopicScreen},
   SubjectScreen: {screen: SubjectScreen},
   SearchScreen: {screen: SearchScreen},
   ResultScreen: {screen: ResultScreen},
-  DetailScreen: {screen: DetailScreen},
+  DetailScreen: {
+    screen: DetailScreen,
+    navigationOptions: ({navigation}) => {
+      const {state} = navigation
+      return {
+        title: state.params.title
+      }
+    }
+  },
   ClassifyScreen: {screen: ClassifyScreen},
-  ClassifyListScreen: {screen: ClassifyListScreen},
-  ChannelScreen: {screen: ChannelScreen},
+  ClassifyListScreen: {
+    screen: ClassifyListScreen,
+    navigationOptions: ({navigation}) => {
+      const {state} = navigation
+      return {
+        title: state.params.title
+      }
+    }
+  },
+  ChannelScreen: {
+    screen: ChannelScreen,
+    navigationOptions: ({navigation}) => {
+      const {state} = navigation
+      return {
+        title: state.params.title
+      }
+    }
+  },
   HomeScreen: {screen: HomeScreen},
   LoadingScreen: {screen: LoadingScreen},
   LoggedInStack: {screen: LoggedInStackNavigator},
