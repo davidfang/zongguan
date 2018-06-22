@@ -9,9 +9,11 @@ const {Types, Creators} = createActions({
   tbSuccess: ['payload'],
   tbFailure: ['error', 'payload'],
   tbInit: null,
-  tbIndexRecommendRequest: ['page'],
+  tbIndexRecommendRequest: null,
   tbIndexRecommendSuccess: ['payload'],
   tbIndexRecommendFailure: ['error', 'payload'],
+  tbChannelProductRequest: ['channelId'],
+  tbChannelProductSuccess: ['channelId', 'payload'],
   tbDetailRequest: ['goodsId'],
   tbDetailSuccess: ['goodsId', 'smallImages', 'detailImages', 'guessLike', 'payload'],
   tbDetailFailure: ['error', 'payload']
@@ -29,7 +31,13 @@ export const INITIAL_STATE = Immutable({
   productDetailImages: {}, // 产品详情图
   productGuessLike: {}, // 产品推荐关联
   indexRecommend: [], // 首页推荐产品集
+  indexRecommendPageNo: 1, // 首页推荐产品集 页码 里面对应频道 {1:10,2:8}
   indexRecommendMore: true, // 首页推荐产品集是否有更多
+  channelProductPageNo: {}, // 频道产品集 页码
+  channelProductMore: {}, // 频道产品集是否有更多 里面对应频道 {1:true,2:false}
+  channelProduct: {}, // 频道产品集 {1:[{...},{...}],2:[{...},{...}]}
+  categoryProductMore: {}, // 分类产品集是否有更多 里面对应分类 {1:true,2:false}
+  categoryProduct: {}, // 分类产品集 {1:[{...},{...}],2:[{...},{...}]}
   fetching: false,
   payload: null,
   error: null
@@ -40,9 +48,19 @@ export const INITIAL_STATE = Immutable({
 export const TbSelectors = {
   getData: state => state.data,
   getProductLists: state => state.productLists, // 选择产品列表
+  getIndexRecommendPageNo: state => state.indexRecommendPageNo,// 选择首页推荐产品页码
   getIndexRecommendIds: state => state.indexRecommend, // 选择首页推荐ID列表
   getIndexRecommendPrds: state => { // 选择首页推荐产品列表
     return state.indexRecommend.length ? state.indexRecommend.map(id => state.productLists[id]) : []
+  },
+  getChannelProductPageNo: (state, channelId) => { // 选择频道推荐产品页码
+    return state.channelProductPageNo.hasOwnProperty(channelId) ? state.channelProductPageNo[channelId] : 1
+  },
+  getChannelProductIds: (state, channelId) => { // 选择频道推荐ID列表
+    return state.channelProduct.hasOwnProperty(channelId) ? state.channelProduct[channelId] : []
+  },
+  getChannelProductPrds: (state, channelId) => { // 选择频道推荐产品列表
+    return state.channelProduct.hasOwnProperty(channelId) ? state.channelProduct[channelId].map(id => state.productLists[id]) : []
   },
   // 获得产品小图 轮播图
   getSmallImages: (state, goodsId) => state.productSmallImages.hasOwnProperty(goodsId) ? state.productSmallImages[goodsId] : [],
@@ -76,7 +94,7 @@ export const failure = (state, {payload, error}) =>
   state.merge({fetching: false, error, payload})
 
 // request the data from an api
-export const indexRecommendRequest = (state, {page}) =>
+export const indexRecommendRequest = (state) =>
   state.merge({fetching: true, payload: null})
 
 // successful api lookup
@@ -91,8 +109,38 @@ export const indexRecommendSuccess = (state, action) => {
     fetching: false,
     error: null,
     productLists,
-    indexRecommendMore: result.length < 20,
+    indexRecommendPageNo: state.indexRecommendPageNo + 1,
+    indexRecommendMore: result.length == 20,
     indexRecommend: union(result, state.indexRecommend),
+    payload
+  })
+}
+
+// request the data from an api
+export const channelProductRequest = (state, {channelId}) =>
+  state.merge({fetching: true, payload: null})
+
+// successful api lookup
+export const channelProductSuccess = (state, action) => {
+  const {channelId, payload} = action
+  const productSchema = new schema.Entity('items', {}, {idAttribute: 'goodsId'})
+  const productsData = normalize(payload, [productSchema])
+  const {entities: {items}, result} = productsData
+  const productLists = Object.assign({}, items, state.productLists)
+
+  const channelProductMore = state.channelProductMore.merge({[channelId]: result.length == 20})
+  const channelProductPageNoNew = state.channelProductPageNo.hasOwnProperty(channelId) ? (state.channelProductPageNo[channelId] +1 ): 2
+  const channelProductPageNo = state.channelProductPageNo.merge({[channelId]:channelProductPageNoNew})
+  let channelProductNew = state.channelProduct.hasOwnProperty(channelId) ? union(result, state.channelProduct[channelId]) : result
+  const channelProduct = state.channelProduct.merge({[channelId]: channelProductNew})
+
+  return state.merge({
+    fetching: false,
+    error: null,
+    productLists,
+    channelProductPageNo,
+    channelProductMore,
+    channelProduct,
     payload
   })
 }
@@ -140,6 +188,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.TB_INDEX_RECOMMEND_REQUEST]: indexRecommendRequest,
   [Types.TB_INDEX_RECOMMEND_SUCCESS]: indexRecommendSuccess,
   [Types.TB_INDEX_RECOMMEND_FAILURE]: indexRecommendFailure,
+  [Types.TB_CHANNEL_PRODUCT_REQUEST]: channelProductRequest,
+  [Types.TB_CHANNEL_PRODUCT_SUCCESS]: channelProductSuccess,
   [Types.TB_DETAIL_REQUEST]: tbDetailRequest,
   [Types.TB_DETAIL_SUCCESS]: tbDetailSuccess,
   [Types.TB_DETAIL_FAILURE]: tbDetailFailure

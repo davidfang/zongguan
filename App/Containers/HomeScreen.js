@@ -22,7 +22,6 @@ import styles from './Styles/HomeScreenStyle'
 const itemHeight = 50
 
 class HomeScreen extends Component {
-  pageno = 1
   constructor (props) {
     super(props)
     this.state = {
@@ -80,7 +79,7 @@ class HomeScreen extends Component {
    */
   _onRefreshing = () => {
     if (!this.props.fetching) {
-      this.props.getTbIndexRecommend(this.pageno)
+      this.props.getTbIndexRecommend()
     }
   }
 
@@ -88,9 +87,9 @@ class HomeScreen extends Component {
    * 上拉加载 TODO
    */
   _onLoading = () => {
-    if (!this.props.fetching) {
-      this.pageno += 1
-      this.props.getTbIndexRecommend(this.pageno)
+    alert(this.props.fetching)
+    if (!this.props.fetching && this.props.tbIndexRecommendMore) {
+      this.props.getTbIndexRecommend()
     }
   }
 
@@ -194,7 +193,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTbIndexRecommend: (page) => dispatch(TbActions.tbIndexRecommendRequest(page))
+    getTbIndexRecommend: () => dispatch(TbActions.tbIndexRecommendRequest())
   }
 }
 

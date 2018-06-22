@@ -34,7 +34,7 @@ import { forgotPassword, changePassword } from './PasswordSagas'
 import { getAccount, updateAccount, updateProfile, uploadAvatar } from './AccountSagas'
 import { getCaptcha, getCode } from './CaptchaCodeSagas'
 
-import { getTbIndexRecommend, getTbDetail } from './TbSagas'
+import { getTbIndexRecommend,getTbChannelProduct, getTbDetail } from './TbSagas'
 import { getGoodsCategory } from './GoodsCategorySagas'
 
 /* ------------- API ------------- */
@@ -72,6 +72,7 @@ export default function * root () {
 
     takeLatest(GoodsCategoryTypes.GOODS_CATEGORY_REQUEST, getGoodsCategory, api),
     takeLatest(TbTypes.TB_INDEX_RECOMMEND_REQUEST, getTbIndexRecommend, api),
+    takeLatest(TbTypes.TB_CHANNEL_PRODUCT_REQUEST, getTbChannelProduct, api),
     takeLatest(TbTypes.TB_DETAIL_REQUEST, getTbDetail, api)
 
   ])

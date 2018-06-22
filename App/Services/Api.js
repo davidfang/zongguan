@@ -70,6 +70,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
 
   const getGoodsCategory = () => api.get('v1/goods-category/index') // 获得产品分类
   const getTbIndexRecommend = (page) => api.get('v1/taobao/index', {page}) // 获得首页淘宝推荐产品
+  const getTbChannelProduct = (channelId,page) => api.get('v1/taobao/index', {channelId,page}) // 获得频道推荐产品
   const getTbDetail = (goodsId) => api.get('v1/taobao/detail', {goodsId}) // 获得产品详情
 
   // ------
@@ -112,6 +113,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     uploadAvatar,
     getGoodsCategory,
     getTbIndexRecommend,
+    getTbChannelProduct,
     getTbDetail
   }
 }
