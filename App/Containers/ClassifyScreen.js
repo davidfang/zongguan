@@ -37,8 +37,8 @@ class ClassifyScreen extends Component {
   _redirect = item => {
     const {navigate} = this.props.navigation
     navigate('ClassifyListScreen', {
-      cat: item.id,
-      title: item.name
+      channelId: item.id,
+      title: item.title
     })
   }
   renderLRow = (item) => {

@@ -56,6 +56,7 @@ export const TbSelectors = {
   getChannelProductPageNo: (state, channelId) => { // 选择频道推荐产品页码
     return state.channelProductPageNo.hasOwnProperty(channelId) ? state.channelProductPageNo[channelId] : 1
   },
+  getAllChannelProductIds: state => state.channelProduct,// 获得所有频道产品列表
   getChannelProductIds: (state, channelId) => { // 选择频道推荐ID列表
     return state.channelProduct.hasOwnProperty(channelId) ? state.channelProduct[channelId] : []
   },
@@ -111,7 +112,7 @@ export const indexRecommendSuccess = (state, action) => {
     productLists,
     indexRecommendPageNo: state.indexRecommendPageNo + 1,
     indexRecommendMore: result.length == 20,
-    indexRecommend: union(result, state.indexRecommend),
+    indexRecommend: union(state.indexRecommend, result),
     payload
   })
 }
@@ -131,7 +132,7 @@ export const channelProductSuccess = (state, action) => {
   const channelProductMore = state.channelProductMore.merge({[channelId]: result.length == 20})
   const channelProductPageNoNew = state.channelProductPageNo.hasOwnProperty(channelId) ? (state.channelProductPageNo[channelId] +1 ): 2
   const channelProductPageNo = state.channelProductPageNo.merge({[channelId]:channelProductPageNoNew})
-  let channelProductNew = state.channelProduct.hasOwnProperty(channelId) ? union(result, state.channelProduct[channelId]) : result
+  let channelProductNew = state.channelProduct.hasOwnProperty(channelId) ? union( state.channelProduct[channelId], result) : result
   const channelProduct = state.channelProduct.merge({[channelId]: channelProductNew})
 
   return state.merge({

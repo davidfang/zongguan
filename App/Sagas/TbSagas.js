@@ -23,7 +23,7 @@ export function * getTbIndexRecommend (api, action) {
   // const currentData = yield select(TbSelectors.getData)
   // make the call to the api
   const response = yield call(api.getTbIndexRecommend, page)
-  yield put(TbActions.tbFailure(response, response))
+
   // success?
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',
@@ -45,8 +45,8 @@ export function * getTbChannelProduct (api, action) {
   // get current data from Store
   // const currentData = yield select(TbSelectors.getData)
   // make the call to the api
-  const response = yield call(api.getTbChannelProduct, {channelId, page})
-
+  const response = yield call(api.getTbChannelProduct, channelId, page)
+  // yield put(TbActions.tbFailure(response, response))
   // success?
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',
