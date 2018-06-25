@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { TouchableOpacity, FlatList, Image, View, Text } from 'react-native'
 import styles from './Styles/ChanelBarStyle'
 
@@ -16,6 +16,7 @@ export default class ChanelBar extends Component {
   static defaultProps = {
     data: []
   }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -24,13 +25,20 @@ export default class ChanelBar extends Component {
   }
 
   _onChange = item => {
-    if (item.id === this.state.selected) {
+    let navigate = this.props.navigation && this.props.navigation.navigate
+    navigate &&
+    navigate('ChannelScreen', {
+      title: item.title,
+      channelId: item.id
+    })
+
+    /*if (item.id === this.state.selected) {
       return
     }
     this.setState({
       selected: item.id
     })
-    this.props.onChange && this.props.onChange(item)
+    this.props.onChange && this.props.onChange(item)*/
   }
   _renderItem = data => {
     let item = data.item
@@ -60,7 +68,7 @@ export default class ChanelBar extends Component {
           navigate &&
           navigate('ClassifyListScreen', {
             title: child.title,
-            id:child.id
+            id: child.id
           })
         }}
         style={styles.child}

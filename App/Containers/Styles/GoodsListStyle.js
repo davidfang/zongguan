@@ -32,5 +32,28 @@ export default StyleSheet.create({
   },
   listContent: {
     marginTop: Metrics.baseMargin
+  },
+
+  child: {
+    paddingHorizontal: 5,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: Metrics.screenWidth * 0.25
+  },
+  childText: {
+    color: Colors.charcoal
+  },
+  childs: {
+    //height: Metrics.screenHeight * 0.18,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eeeff1',
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  childImage: {
+    width: 35,
+    height: 35
   }
 })

@@ -4,10 +4,13 @@ import { ApplicationStyles, Metrics } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
+    paddingBottom: 135
   },
   classify: {
-    flexDirection: 'row'
+    flex: Metrics.height,
+    flexDirection: 'row',
+    position: 'relative'
   },
   classifyItem: {
     width: Metrics.width / 2 - 15,
@@ -54,13 +57,10 @@ export default StyleSheet.create({
   },
   rightList: {
     width: 3 * Metrics.screenWidth / 4,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     justifyContent: 'flex-start'
   },
   rItem: {
-    flexDirection: 'column',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },

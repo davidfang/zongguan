@@ -43,9 +43,9 @@ class ChannelScreen extends Component {
     /***/
     return (
       <View style={styles.container}>S
-        <ChanelBar data={this.props.goodsCategories} navigation={this.props.navigation}
+        {/*<ChanelBar data={this.props.goodsCategories} navigation={this.props.navigation}
                    selected={this.props.channelId}/>
-        <SortBar onChange={this._onSortChange}/>
+        <SortBar onChange={this._onSortChange}/>*/}
         <GoodsList
           ref={flat => (this._flatList = flat)}
           fetching={this.props.fetching}
@@ -53,6 +53,9 @@ class ChannelScreen extends Component {
           fetchRequest={this._fetchRequest}
           navigation={this.props.navigation}
           data={this.props.channelProductPrds}
+          channels={this.props.goodsCategories}
+          channelId={this.props.channelId}
+          onSortChange={this._onSortChange}
         />
       </View>
     )

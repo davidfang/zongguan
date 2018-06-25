@@ -3,7 +3,7 @@ import { View, Text, FlatList, Image, TouchableOpacity, SectionList } from 'reac
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import GoodsCategoryActions, {GoodsCategorySelectors} from '../Redux/GoodsCategoryRedux'
+import GoodsCategoryActions, { GoodsCategorySelectors } from '../Redux/GoodsCategoryRedux'
 
 // Styles
 import styles from './Styles/ClassifyScreenStyle'
@@ -17,6 +17,7 @@ class ClassifyScreen extends Component {
       cell: 0
     }
   }
+
   componentDidMount () {
     if (this.props.goodsCategories.length < 1) {
       this.props.getGoodsCategory()
@@ -43,6 +44,7 @@ class ClassifyScreen extends Component {
   renderLRow = (item) => {
     return (
       <TouchableOpacity
+        key={item.index}
         style={[styles.lItem, {backgroundColor: item.index == this.state.cell ? 'white' : null}]}
         onPress={() => this.cellAction(item)}>
         <Text style={styles.lText}>{item.item.title}</Text>
@@ -70,14 +72,29 @@ class ClassifyScreen extends Component {
       this.setState({cell: index})
     }
   }
-
-
-  renderRRow = (item) => {
+  _renderRItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.rItem} onPress={() => this._redirect(item)}>
-        <Image style={styles.icon} source={{uri: item.item.img}}/>
-        <Text style={styles.categoryText}>{item.item.title}</Text>
+      <TouchableOpacity key={item.id} style={styles.rItem} onPress={() => this._redirect(item)}>
+        <Image style={styles.icon} source={{uri: item.img}}/>
+        <Text style={styles.categoryText}>{item.title}</Text>
       </TouchableOpacity>
+    )
+  }
+  renderRRow = ({section, index}) => {
+    if (index != 0) return null
+    return (
+      <FlatList
+        key={section.id}
+        numColumns={3}
+        data={section.data}
+        getItemLayout={(layoutData, index) => ({
+          length: 50,
+          offset: 50 * index,
+          index
+        })}
+        renderItem={this._renderRItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
     )
   }
 
@@ -96,7 +113,7 @@ class ClassifyScreen extends Component {
   }
 
   render () {
-    if(this.props.goodsCategories.length > 0) {
+    if (this.props.goodsCategories.length > 0) {
       return (
         <View style={styles.container}>
           <SearchBar
@@ -113,9 +130,10 @@ class ClassifyScreen extends Component {
               style={styles.leftList}
               data={this.props.goodsCategories}
               renderItem={(item) => this.renderLRow(item)}
+              initialNumToRender={15}
               getItemLayout={this._itemLayout}
-              ItemSeparatorComponent={() => this.separator()}
-              keyExtractor={(item) => item.id}
+              //ItemSeparatorComponent={() => this.separator()}
+              keyExtractor={(item) => item.id.toString()}
 
             />
             <SectionList
@@ -123,15 +141,18 @@ class ClassifyScreen extends Component {
               //style={styles.rightList}
               contentContainerStyle={styles.rightList}
               renderSectionHeader={(section) => this.sectionComp(section)}
-              renderItem={(item) => this.renderRRow(item)}
+              initialNumToRender={10}
+              maxToRenderPerBatch={10}
+              //renderItem={(item) => this.renderRRow(item)}
+              renderItem={this.renderRRow}
               sections={this.props.goodsCategories}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.id.toString()}
               onViewableItemsChanged={(info) => this.itemChange(info)}
             />
           </View>
         </View>
       )
-    }else{
+    } else {
       return <View style={styles.container}/>
     }
   }

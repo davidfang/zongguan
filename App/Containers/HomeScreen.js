@@ -87,7 +87,6 @@ class HomeScreen extends Component {
    * 上拉加载 TODO
    */
   _onLoading = () => {
-    alert(this.props.fetching)
     if (!this.props.fetching && this.props.tbIndexRecommendMore) {
       this.props.getTbIndexRecommend()
     }
@@ -118,7 +117,7 @@ class HomeScreen extends Component {
           maxToRenderPerBatch={10}
           onEndReachedThreshold={0.3}
           ref={flat => (this._flatList = flat)}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index.toString()}
           ListEmptyComponent={<Empty />}
           getItemLayout={this._itemLayout}
           onEndReached={this._onLoading}

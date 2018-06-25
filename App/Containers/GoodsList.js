@@ -8,6 +8,9 @@ import ScrollToTop from '../Components/ScrollToTop'
 import Empty from '../Components/Empty'
 import Footer from '../Components/Footer'
 import SectionListItem from '../Components/SectionListItem'
+import ChanelBar from '../Components/ChanelBar'
+import SortBar from '../Components/SortBar'
+
 
 // Styles
 import styles from './Styles/GoodsListStyle'
@@ -177,7 +180,10 @@ export default class GoodsList extends React.PureComponent {
       this.props.fetchRequest()
     }
   }
-
+  initDatas = () => {
+    this.pageno = 1;
+    this._loadDatas();
+  }
   componentWillMount () {
     if (this.props.data.length < 1) {
       this.props.fetchRequest()
@@ -229,7 +235,15 @@ export default class GoodsList extends React.PureComponent {
   _scrollToTop = () => {
     this._flatList.scrollToOffset({offset: 0, animated: true})
   }
-
+  _renderHeader = () => {
+    return (
+      <View>
+        {this.props.channels && <ChanelBar data={this.props.channels} navigation={this.props.navigation}
+                   selected={this.props.channelId}/>}
+        <SortBar onChange={this.props.onSortChange}/>
+      </View>
+    )
+  }
   render () {
     return (
       <View style={styles.container}>
@@ -246,6 +260,7 @@ export default class GoodsList extends React.PureComponent {
           ListEmptyComponent={<Empty/>}
           getItemLayout={this._itemLayout}
           onEndReached={this._onLoading}
+          ListHeaderComponent={this._renderHeader}
           renderItem={this._renderItem}
           onScroll={this._onScroll}
           refreshControl={
