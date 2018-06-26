@@ -62,9 +62,11 @@ class ClassifyScreen extends Component {
   }
 
   itemChange = (info) => {
+    //alert(info)
     let section = info.viewableItems[0].section
     if (section) {
       let index = this.props.goodsCategories.indexOf(section)
+      //alert(index)
       if (index < 0) {
         index = 0
       }
@@ -108,7 +110,7 @@ class ClassifyScreen extends Component {
 
   separator = () => {
     return (
-      <View style={{height: 1, backgroundColor: 'gray'}}/>
+      <View />
     )
   }
 
@@ -132,7 +134,7 @@ class ClassifyScreen extends Component {
               renderItem={(item) => this.renderLRow(item)}
               initialNumToRender={15}
               getItemLayout={this._itemLayout}
-              //ItemSeparatorComponent={() => this.separator()}
+              ItemSeparatorComponent={() => this.separator()}
               keyExtractor={(item) => item.id.toString()}
 
             />
