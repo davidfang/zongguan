@@ -70,7 +70,7 @@ export default class SearchBar extends Component {
           <TextInput
             placeholder='好宝贝 等你搜'
             returnKeyType='search'
-            value={this.state.inputText}
+            defaultValue={this.state.inputText}
             onChangeText={this.onTextChange}
             underlineColorAndroid='transparent'
             onSubmitEditing={this.searchClick}

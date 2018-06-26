@@ -105,7 +105,7 @@ class HomeScreen extends Component {
         <SearchBar
           showLogo={true}
           onSubmit={key => {
-            navigate('result', {
+            navigate('ResultScreen', {
               keyworld: key
             })
           }}

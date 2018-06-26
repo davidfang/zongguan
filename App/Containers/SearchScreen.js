@@ -24,7 +24,7 @@ class SearchScreen extends Component {
 
   _onSubmit = () => {
     let {navigate} = this.props.navigation
-    navigate('result', {
+    navigate('ResultScreen', {
       keyworld: this.state.keyword
     })
     Keyboard.dismiss()
@@ -59,7 +59,7 @@ class SearchScreen extends Component {
               />
               <TextInput
                 placeholder='好宝贝 等你搜'
-                value={this.state.keyword}
+                defaultValue={this.state.keyword}
                 returnKeyType='search'
                 style={styles.searchInput}
                 underlineColorAndroid='transparent'

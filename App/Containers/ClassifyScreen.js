@@ -115,13 +115,14 @@ class ClassifyScreen extends Component {
   }
 
   render () {
+    const {navigate} = this.props.navigation
     if (this.props.goodsCategories.length > 0) {
       return (
         <View style={styles.container}>
           <SearchBar
             showLogo={true}
             onSubmit={key => {
-              navigate('result', {
+              navigate('ResultScreen', {
                 keyworld: key
               })
             }}
