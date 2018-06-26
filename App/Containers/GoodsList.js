@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, FlatList, RefreshControl } from 'react-native'
-
+import R from 'ramda'
 import ScrollToTop from '../Components/ScrollToTop'
 import Empty from '../Components/Empty'
 import Footer from '../Components/Footer'
@@ -12,16 +12,10 @@ import SortBar from '../Components/SortBar'
 import styles from './Styles/GoodsListStyle'
 
 export default class GoodsList extends React.PureComponent {
-  state = {isShow: false}
-  /**
-   * 加载数据
-   */
-  _loadDatas = () => {
-    this.props.fetchRequest(this.props.channelId)
-  }
-  initDatas = () => {
-    this.pageno = 1
-    this._loadDatas()
+  state = {
+    isShow: false,
+    currentSort: 0,
+    data: []
   }
 
   componentWillMount () {
@@ -75,9 +69,43 @@ export default class GoodsList extends React.PureComponent {
       <View>
         {this.props.channels && <ChanelBar data={this.props.channels} navigation={this.props.navigation}
                                            selected={this.props.channelId}/>}
-        <SortBar onChange={this.props.onSortChange}/>
+        <SortBar onChange={this._onSortChange}/>
       </View>
     )
+  }
+  _onSortChange = sort => {
+    this.state.currentSort = sort
+    this.initDatas()
+  }
+
+  initDatas () {
+    let data = this._sort(this.props.data)
+    this.setState({data: data})
+  }
+
+  _sort = (data) => {
+    let by
+    switch (this.state.currentSort) {
+      case  0:
+        by = R.descend(R.prop('costPrice'))
+        return R.sort(by, data)
+        break
+      case  1:
+        by = R.descend(R.prop('purchaseNum'))
+        return R.sort(by, data)
+        break
+      case  2:
+        by = R.descend(R.prop('rebatePrice'))
+        return R.sort(by, data)
+        break
+      case  3:
+        by = R.descend(R.prop('couponPrice'))
+        return R.sort(by, data)
+        break
+      default:
+        return data
+    }
+
   }
 
   render () {
@@ -86,13 +114,13 @@ export default class GoodsList extends React.PureComponent {
         <FlatList
 
           style={styles.listView}
-          data={this.props.data}
+          data={this._sort(this.props.data)}
           numColumns={1}
           initialNumToRender={10}
           maxToRenderPerBatch={10}
           onEndReachedThreshold={0.5}
           ref={flat => (this._flatList = flat)}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => item.goodsId.toString()}
           ListEmptyComponent={<Empty/>}
           getItemLayout={this._itemLayout}
           onEndReached={this._onLoading}

@@ -12,7 +12,7 @@ const {Types, Creators} = createActions({
   tbIndexRecommendRequest: null,
   tbIndexRecommendSuccess: ['payload'],
   tbIndexRecommendFailure: ['error', 'payload'],
-  tbChannelProductRequest: ['channelId'],
+  tbChannelProductRequest: ['channelId', 'sortId'],
   tbChannelProductSuccess: ['channelId', 'payload'],
   tbDetailRequest: ['goodsId'],
   tbDetailSuccess: ['goodsId', 'smallImages', 'detailImages', 'guessLike', 'payload'],
@@ -118,7 +118,7 @@ export const indexRecommendSuccess = (state, action) => {
 }
 
 // request the data from an api
-export const channelProductRequest = (state, {channelId}) =>
+export const channelProductRequest = (state, {channelId, sortId}) =>
   state.merge({fetching: true, payload: null})
 
 // successful api lookup

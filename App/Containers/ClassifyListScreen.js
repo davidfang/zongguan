@@ -1,19 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text, KeyboardAvoidingView } from 'react-native'
-import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view'
-import lodash from 'lodash'
+import { View} from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import { GoodsCategorySelectors } from '../Redux/GoodsCategoryRedux'
 import TbActions, { TbSelectors } from '../Redux/TbRedux'
 
-import ChanelBar from '../Components/ChanelBar'
-import SortBar from '../Components/SortBar'
+
 import GoodsList from './GoodsList'
 
 // Styles
 import styles from './Styles/ClassifyListScreenStyle'
-import { Colors } from '../Themes'
 
 class ClassifyListScreen extends Component {
   currentCat = 0
@@ -30,15 +26,11 @@ class ClassifyListScreen extends Component {
     this.currentCat = cat.id
     //this._flatList.initDatas();
   }
-  _onSortChange = sort => {
-    this.currentSort = sort
-    //this._flatList.initDatas();
-  }
   _fetchRequest = (channelId) => {
     //alert(this.props.fetching)
     let more = this.props.more.hasOwnProperty(channelId) ? this.props.more[channelId] : true
     if (!this.props.fetching && more) {
-      this.props.getTbChannelProduct(channelId)
+      this.props.getTbChannelProduct(channelId, this.currentSort)
     }
   }
 
@@ -58,7 +50,6 @@ class ClassifyListScreen extends Component {
           data={this.props.channelProductPrds}
           //channels={null}
           channelId={this.props.channelId}
-          onSortChange={this._onSortChange}
         />
       </View>
     )
@@ -78,7 +69,8 @@ const mapStateToProps = (state, props) => {
   const allProductLists = TbSelectors.getProductLists(state.tb)
   // 频道产品
   const channelProductPrds = TbSelectors.getChannelProductPrds(state.tb, channelId)
-
+  // 更多
+  const more = state.tb.channelProductMore.hasOwnProperty(channelId) ? state.tb.channelProductMore[channelId] : true
   return {
     channelId,
     goodsCategories,
@@ -88,13 +80,13 @@ const mapStateToProps = (state, props) => {
     channelProductPrds,
 
     fetching: state.tb.fetching, // 加载
-    more: state.tb.channelProductMore // 更多
+    more: more // 更多
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTbChannelProduct: (channelId) => dispatch(TbActions.tbChannelProductRequest(channelId))
+    getTbChannelProduct: (channelId, sortId) => dispatch(TbActions.tbChannelProductRequest(channelId, sortId))
   }
 }
 

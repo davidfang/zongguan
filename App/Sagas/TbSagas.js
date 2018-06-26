@@ -40,13 +40,13 @@ export function * getTbIndexRecommend (api, action) {
 }
 
 export function * getTbChannelProduct (api, action) {
-  const {channelId} = action
+  const {channelId, sortId} = action
   const page = yield select(channelProductPageNo, channelId)
   // get current data from Store
   // const currentData = yield select(TbSelectors.getData)
   // make the call to the api
-  const response = yield call(api.getTbChannelProduct, channelId, page)
-  // yield put(TbActions.tbFailure(response, response))
+  const response = yield call(api.getTbChannelProduct, channelId, sortId, page)
+  yield put(TbActions.tbFailure(response, response))
   // success?
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',

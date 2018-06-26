@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View} from 'react-native'
+import { View } from 'react-native'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 import lodash from 'lodash'
 import { connect } from 'react-redux'
@@ -27,15 +27,11 @@ class ChannelScreen extends Component {
     this.currentCat = cat.id
     //this._flatList.initDatas();
   }
-  _onSortChange = sort => {
-    this.currentSort = sort
-    //this._flatList.initDatas();
-  }
   _fetchRequest = (channelId) => {
     //alert(this.props.fetching)
-    let more = this.props.more.hasOwnProperty(channelId) ? this.props.more[channelId]: true
+    let more = this.props.more.hasOwnProperty(channelId) ? this.props.more[channelId] : true
     if (!this.props.fetching && more) {
-      this.props.getTbChannelProduct(channelId)
+      this.props.getTbChannelProduct(channelId, this.currentSort)
     }
   }
 
@@ -53,7 +49,7 @@ class ChannelScreen extends Component {
                            tabBarInactiveTextColor={Colors.black}
                            tabBarUnderlineStyle={styles.scrollableTabBarUnderlineStyle}
                            renderTabBar={() => <ScrollableTabBar/>}
-                           initialPage={ lodash.findIndex(this.props.goodsCategories,{id:this.props.channelId})}
+                           initialPage={lodash.findIndex(this.props.goodsCategories, {id: this.props.channelId})}
         >
           {
             this.props.goodsCategories.map((v, i) => {
@@ -67,7 +63,6 @@ class ChannelScreen extends Component {
                                  data={channelProductPrds}
                                  channels={this.props.goodsCategories}
                                  channelId={v.id}
-                                 onSortChange={this._onSortChange}
               />)
 
             })
@@ -92,7 +87,8 @@ const mapStateToProps = (state, props) => {
   const allProductLists = TbSelectors.getProductLists(state.tb)
   // 频道产品
   const channelProductPrds = TbSelectors.getChannelProductPrds(state.tb, channelId)
-
+  // 更多
+  const more = state.tb.channelProductMore.hasOwnProperty(channelId) ? state.tb.channelProductMore[channelId] : true
   return {
     channelId,
     goodsCategories,
@@ -102,13 +98,13 @@ const mapStateToProps = (state, props) => {
     channelProductPrds,
 
     fetching: state.tb.fetching, // 加载
-    more: state.tb.channelProductMore // 更多
+    more: more // 更多
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTbChannelProduct: (channelId) => dispatch(TbActions.tbChannelProductRequest(channelId))
+    getTbChannelProduct: (channelId, sortId) => dispatch(TbActions.tbChannelProductRequest(channelId, sortId))
   }
 }
 

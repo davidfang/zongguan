@@ -36,7 +36,7 @@ export default class SortBar extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: 0
+      selected: 4
     }
   }
 
