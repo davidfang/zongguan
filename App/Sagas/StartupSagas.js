@@ -52,5 +52,5 @@ export function * startup (action) {
   }
   yield put(BannerActions.bannerRequest('swiper'))
   yield put(BannerActions.bannerRequest('recommend'))
-  //yield put(TbActions.tbIndexRecommendRequest(1))
+  yield put(TbActions.tbIndexRecommendRequest(1))
 }

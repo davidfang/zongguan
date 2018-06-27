@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { View} from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import { GoodsCategorySelectors } from '../Redux/GoodsCategoryRedux'
 import TbActions, { TbSelectors } from '../Redux/TbRedux'
-
 
 import GoodsList from './GoodsList'
 
@@ -18,7 +17,8 @@ class ClassifyListScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      scrollIsShow: false
+      scrollIsShow: false,
+      channelId: props.channelId
     }
   }
 
@@ -26,11 +26,10 @@ class ClassifyListScreen extends Component {
     this.currentCat = cat.id
     //this._flatList.initDatas();
   }
-  _fetchRequest = (channelId) => {
-    //alert(this.props.fetching)
-    let more = this.props.more.hasOwnProperty(channelId) ? this.props.more[channelId] : true
+  _fetchRequest = (sortId) => {
+    let more = this.props.more.hasOwnProperty(this.state.channelId) ? this.props.more[this.state.channelId] : true
     if (!this.props.fetching && more) {
-      this.props.getTbChannelProduct(channelId, this.currentSort)
+      this.props.getTbChannelProduct(this.state.channelId, sortId)
     }
   }
 

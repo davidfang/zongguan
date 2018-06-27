@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import AutoImage from 'react-native-scalable-image'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
@@ -98,6 +99,10 @@ class DetailScreen extends Component {
     let {goodsInfo} = this.state
     return (
       <View style={styles.container}>
+        <TouchableOpacity style={styles.backIcon} onPress={() => this.props.navigation.goBack()}>
+          <Icon name='chevron-left' size={24} color='#fff'
+          />
+        </TouchableOpacity>
         <FlatList
           ref={flat => (this._flatList = flat)}
           onScroll={this._onScroll}

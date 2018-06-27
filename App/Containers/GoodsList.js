@@ -19,23 +19,29 @@ export default class GoodsList extends React.PureComponent {
   }
 
   componentWillMount () {
+    //let data = this.props.data
+    //if (data.length < 1) {
     if (this.props.data.length < 1) {
-      this.props.fetchRequest(this.props.channelId)
+      this.props.fetchRequest(this.state.currentSort)
+      data = this._sort(this.props.data)
+      this.setState({data: data})
     }
+
+
   }
 
   /**
    * 下拉刷新
    */
   _onRefreshing = () => {
-    this.props.fetchRequest(this.props.channelId)
+    this.props.fetchRequest(this.state.currentSort)
   }
 
   /**
    * 上拉加载
    */
   _onLoading = () => {
-    this.props.fetchRequest(this.props.channelId)
+    this.props.fetchRequest(this.state.currentSort)
   }
 
   _renderItem = ({item}) => (

@@ -30,7 +30,7 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  GoodsList: { screen: GoodsList },
+  GoodsList: {screen: GoodsList},
   LoginScreen: {screen: LoginScreen},
   RegisterScreen: {screen: RegisterScreen},
   ForgotPasswordScreen: {screen: ForgotPasswordScreen},
@@ -63,7 +63,7 @@ const PrimaryNav = StackNavigator({
     navigationOptions: ({navigation}) => {
       const {state} = navigation
       return {
-        title: state.params.title
+        header: null
       }
     }
   },
@@ -116,6 +116,25 @@ const PrimaryNav = StackNavigator({
                          style={{marginRight: 20}}/>,
     }
   }
+  /*mode: 'card',
+  initialRouteName: 'MainStack',
+  headerMode: 'screen',
+  navigationOptions: {
+    headerStyle: {
+      height: 48,
+      borderBottomWidth: 0,
+      backgroundColor: '#fff',
+      elevation: 0,
+      shadowOpacity: 0
+    },
+    headerTitleStyle: {
+      alignSelf: 'center'
+    },
+    headerBackTitle: null,
+    headerTintColor: '#333333',
+    showIcon: true,
+    headerRight: <View/>
+  }*/
 })
 
 export default PrimaryNav

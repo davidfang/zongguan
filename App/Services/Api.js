@@ -49,7 +49,6 @@ const create = (baseURL = AppConfig.apiUrl) => {
   const login = (userAuth) => api.post('v1/sign-in/login', userAuth)
   const getSmsCode = (mobile) => api.get('sms/get-code', {mobile})
 
-
   const register = (user) => api.post('v1/sign-in/signup', user) // 注册
   const forgotPassword = (data) => api.post('v1/sign-in/reset-password', data) // 忘记密码
 
@@ -70,7 +69,8 @@ const create = (baseURL = AppConfig.apiUrl) => {
 
   const getGoodsCategory = () => api.get('v1/goods-category/index') // 获得产品分类
   const getTbIndexRecommend = (page) => api.get('v1/taobao/index', {page}) // 获得首页淘宝推荐产品
-  const getTbChannelProduct = (channelId, sortId, page) => api.get('v1/taobao/index', {channelId, sortId, page}) // 获得频道推荐产品
+  const getTbChannelProduct = (channelId, sortId, page) => api.get('v1/taobao/channel', {channelId, sortId, page}) // 获得频道推荐产品
+  const getTbSearchKeyWord = (keyWord, page, sortId) => api.get('v1/taobao/search', {keyWord, page, sortId}) // 获得搜索产品
   const getTbDetail = (goodsId) => api.get('v1/taobao/detail', {goodsId}) // 获得产品详情
 
   // ------
@@ -114,6 +114,7 @@ const create = (baseURL = AppConfig.apiUrl) => {
     getGoodsCategory,
     getTbIndexRecommend,
     getTbChannelProduct,
+    getTbSearchKeyWord,
     getTbDetail
   }
 }

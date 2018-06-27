@@ -15,6 +15,7 @@ import TbActions,{ TbSelectors } from '../Redux/TbRedux'
 
 export const indexRecommendPageNo = (state) => TbSelectors.getIndexRecommendPageNo(state.tb)
 export const channelProductPageNo = (state,channelId) => TbSelectors.getChannelProductPageNo(state.tb,channelId)
+export const searchPageNo = (state,keyWord) => TbSelectors.getSearchPageNo(state.tb,keyWord)
 
 export function * getTbIndexRecommend (api, action) {
   //const {page} = action
@@ -54,6 +55,30 @@ export function * getTbChannelProduct (api, action) {
     // yield put(TbActions.tbSuccess(response.data))
     if (response.data.status) {
       yield put(TbActions.tbChannelProductSuccess(channelId, response.data.data))
+    } else {
+      yield put(TbActions.tbFailure(response.data.message, response))
+    }
+  } else {
+    yield put(TbActions.tbFailure(response.problem, response))
+  }
+}
+
+export function * getTbSearch (api, action) {
+  //const {page} = action
+  const {keyWord, sortId} = action
+  const page = yield select(searchPageNo, keyWord)
+  // get current data from Store
+  // const currentData = yield select(TbSelectors.getData)
+  // make the call to the api
+  const response = yield call(api.getTbSearchKeyWord, keyWord, page, sortId)
+
+  // success?
+  if (response.ok) {
+    // You might need to change the response here - do this with a 'transform',
+    // located in ../Transforms/. Otherwise, just pass the data back from the api.
+    // yield put(TbActions.tbSuccess(response.data))
+    if (response.data.status) {
+      yield put(TbActions.tbSearchSuccess(keyWord, response.data.data))
     } else {
       yield put(TbActions.tbFailure(response.data.message, response))
     }

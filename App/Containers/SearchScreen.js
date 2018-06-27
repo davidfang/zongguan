@@ -25,7 +25,7 @@ class SearchScreen extends Component {
   _onSubmit = () => {
     let {navigate} = this.props.navigation
     navigate('ResultScreen', {
-      keyworld: this.state.keyword
+      keyWord: this.state.keyword
     })
     Keyboard.dismiss()
   }

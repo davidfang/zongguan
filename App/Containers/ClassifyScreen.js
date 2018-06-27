@@ -123,7 +123,7 @@ class ClassifyScreen extends Component {
             showLogo={true}
             onSubmit={key => {
               navigate('ResultScreen', {
-                keyworld: key
+                keyWord: key
               })
             }}
           />

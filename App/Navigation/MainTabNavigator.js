@@ -43,7 +43,7 @@ const TabNav = TabNavigator(
             showLogo={true}
             onSubmit={key => {
               navigate('result', {
-                keyworld: key
+                keyWord: key
               })
             }}
           />

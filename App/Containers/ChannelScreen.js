@@ -14,24 +14,24 @@ import { Colors } from '../Themes'
 
 class ChannelScreen extends Component {
   currentCat = 0
-  currentSort = 0
 
   constructor (props) {
     super(props)
     this.state = {
-      scrollIsShow: false
+      scrollIsShow: false,
+      channelId: props.channelId
     }
+    this.channelId = props.channelId
   }
 
   _onCatChange = cat => {
     this.currentCat = cat.id
     //this._flatList.initDatas();
   }
-  _fetchRequest = (channelId) => {
-    //alert(this.props.fetching)
+  _fetchRequest = (channelId,sortId) => {
     let more = this.props.more.hasOwnProperty(channelId) ? this.props.more[channelId] : true
     if (!this.props.fetching && more) {
-      this.props.getTbChannelProduct(channelId, this.currentSort)
+      this.props.getTbChannelProduct(channelId, sortId)
     }
   }
 
@@ -53,12 +53,11 @@ class ChannelScreen extends Component {
         >
           {
             this.props.goodsCategories.map((v, i) => {
-              const channelProductPrds = this.props.allChannelProductIds.hasOwnProperty(v.id) ? this.props.allChannelProductIds[v.id].map(id => this.props.allProductLists[id]) : []
+              const channelProductPrds =  this.props.allChannelProductIds.hasOwnProperty(v.id) ? this.props.allChannelProductIds[v.id].map(id => this.props.allProductLists[id]) : []
               return (<GoodsList key={i} tabLabel={v.title}
-                                 ref={flat => (this._flatList = flat)}
                                  fetching={this.props.fetching}
                                  more={this.props.more}
-                                 fetchRequest={this._fetchRequest}
+                                 fetchRequest={(sortId) => this._fetchRequest(v.id, sortId)}
                                  navigation={this.props.navigation}
                                  data={channelProductPrds}
                                  channels={this.props.goodsCategories}
